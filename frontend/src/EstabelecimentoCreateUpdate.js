@@ -74,7 +74,7 @@ class EstabelecimentoCreateUpdate extends Component {
               <input className="form-control" type="text" ref='endereco'/>
 
 
-            <input className="btn btn-primary" type="submit" value="Submit" />
+            <input className="btn btn-primary" type="submit" value="Enviar" />
             </div>
           </form>
         );

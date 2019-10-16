@@ -24,7 +24,7 @@ componentDidMount() {
 }
 handleDelete(e,pk){
     var  self  =  this;
-    estabelecimentosService.deleteCustomer({pk :  pk}).then(()=>{
+    estabelecimentosService.deleteEstabelecimento({pk :  pk}).then(()=>{
         var  newArr  =  self.state.estabelecimentos.filter(function(obj) {
             return  obj.pk  !==  pk;
         });
