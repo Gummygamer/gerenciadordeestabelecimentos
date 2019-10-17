@@ -18,6 +18,10 @@ export default class EstabelecimentosService{
         const url = `${API_URL}/api/estabelecimentos/${pk}`;
         return axios.get(url).then(response => response.data);
     }
+    getEstabelecimentosNear(pk) {
+        const url = `${API_URL}/api/estabelecimentosnear/${pk}`;
+        return axios.get(url).then(response => response.data);
+    }
     deleteEstabelecimento(estabelecimento){
         const url = `${API_URL}/api/estabelecimentos/${estabelecimento.pk}`;
         return axios.delete(url);

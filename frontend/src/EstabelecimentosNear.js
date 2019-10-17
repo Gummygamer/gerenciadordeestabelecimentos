@@ -3,7 +3,7 @@ import  EstabelecimentosService  from  './EstabelecimentosService';
 
 const  estabelecimentosService  =  new  EstabelecimentosService();
 
-class  EstabelecimentosList  extends  Component {
+class  EstabelecimentosNear extends  Component {
 
 constructor(props) {
     super(props);
@@ -17,7 +17,9 @@ constructor(props) {
 
 componentDidMount() {
     var  self  =  this;
-    estabelecimentosService.getEstabelecimentos().then(function (result) {
+    const { match: { params } } = this.props;
+   
+    estabelecimentosService.getEstabelecimentosNear(params.pk).then(function (result) {
         console.log(result);
         self.setState({ estabelecimentos:  result.data, nextPageURL:  result.nextlink})
     });
@@ -40,8 +42,8 @@ nextPage(){
         self.setState({ estabelecimentos:  result.data, nextPageURL:  result.nextlink})
     });
 }
-render() {
 
+render(){
     return (
         <div  className="estabelecimentos--list">
             <table  className="table">
@@ -62,7 +64,6 @@ render() {
                 <td>
                 <button  onClick={(e)=>  this.handleDelete(e,c.pk) }> Apagar</button>
                 <a  href={"/estabelecimento/" + c.pk}> Alterar</a>
-                <a  href={"/estabelecimentosnear/" + c.pk}> Proximidades</a>
                 </td>
             </tr>)}
             </tbody>
@@ -72,4 +73,4 @@ render() {
         );
   }
 }
-export  default  EstabelecimentosList;
+export  default  EstabelecimentosNear;

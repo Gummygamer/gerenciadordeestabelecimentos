@@ -4,6 +4,7 @@ import { Route, Link } from 'react-router-dom'
 
 import  EstabelecimentosList from './EstabelecimentosList'
 import  EstabelecimentoCreateUpdate  from './EstabelecimentoCreateUpdate'
+import  EstabelecimentosNear from './EstabelecimentosNear'
 import './App.css';
 
 const BaseLayout = () => (
@@ -25,6 +26,7 @@ const BaseLayout = () => (
     <div className="content">
       <Route path="/" exact component={EstabelecimentosList} />
       <Route path="/estabelecimento/:pk"  component={EstabelecimentoCreateUpdate} />
+      <Route path="/estabelecimentosnear/:pk"  component={EstabelecimentosNear} />
       <Route path="/estabelecimento/" exact component={EstabelecimentoCreateUpdate} />
 
     </div>
