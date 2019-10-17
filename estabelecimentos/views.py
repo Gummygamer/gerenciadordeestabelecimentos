@@ -11,7 +11,7 @@ import urllib.request as req
 import urllib.parse as uparse
 import math
 
-bingMapsKey = "AlBkQpWuPja8Hes_4z80XeoklgmJNyBeZwpKFRvY9WCFnU0orbWxA__FkEUvB2zG"
+bingMapsKey = "Your key here"
 
 def coordinates_from_address(address):
         
