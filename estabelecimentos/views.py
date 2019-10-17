@@ -35,7 +35,7 @@ def distance_between_addresses(address1, address2):
 
         lat2,longit2 = coordinates_from_address(address2)
 
-        distUrl = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + str(lat1) + "," + str(longit1) + "&destinations=" + str(lat1) + "," + str(longit2) + "&travelMode=driving&key=" + bingMapsKey
+        distUrl = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + str(lat1) + "," + str(longit1) + "&destinations=" + str(lat2) + "," + str(longit2) + "&travelMode=driving&key=" + bingMapsKey
 
         r1 = req.Request(distUrl)
         r2 = req.urlopen(r1)
@@ -46,28 +46,45 @@ def distance_between_addresses(address1, address2):
 
         return dist
 
+def closest_calc(e,f):
+
+        source = e.endereco
+
+        mindist = math.inf
+        closest = e
+
+        for g in f:
+
+            destination = g.endereco
+            dist = distance_between_addresses(source, destination)
+
+            if (dist < mindist) and (dist > 0):
+                      closest = g
+                      mindist = dist
+
+        return closest        
+
 def estabelecimentos_array_of_closest(pk):
 
         estabelecimentos = Estabelecimento.objects.all()
 
-        estabelecimento = Estabelecimento.objects.get(pk=pk)
-        
-        source = estabelecimento.endereco
-
-        mindist = math.inf
-        closest = estabelecimento
+        estabelecimentos_copy = []
 
         for e in estabelecimentos:
-              
-              destination = e.endereco
-              dist = distance_between_addresses(source, destination)
+              estabelecimentos_copy.append(e) 
 
-              if (dist < mindist) and (dist > 0):
-                      closest = e
-                      mindist = dist
+        estabelecimento = Estabelecimento.objects.get(pk=pk)
 
         arrayofclosest = []
-        arrayofclosest.append(closest)
+
+        quant = 2
+
+        for i in range(quant):
+
+             closest = closest_calc(estabelecimento,estabelecimentos_copy)
+              
+             arrayofclosest.append(closest)
+             estabelecimentos_copy.remove(closest)
 
         return arrayofclosest
 
